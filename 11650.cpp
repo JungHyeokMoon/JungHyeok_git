@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-struct Point {
+/*struct Point {
 	int x, y;
 	
 };
@@ -18,7 +18,7 @@ bool cmp(const Point &u, const Point &v) {
 	else {
 		return false;
 	}
-}
+}*/
 
 int main() {
 	int n;
@@ -38,4 +38,22 @@ int main() {
 	}
 
 	return 0;
+}
+
+int main() {
+	int n;
+	scanf("%d", &n);
+	vector<pair<int, int>> a(n);//n개의 공간을만들고
+
+	for (int i = 0; i < n; i++)
+		scanf("%d %d", &a[i].first, &a[i].second);
+
+	sort(a.begin(), a.end());
+
+	for (int i = 0; i < n; i++)
+		printf("%d %d\n", a[i].first, a[i].second);
+
+	return 0;
+
+
 }
