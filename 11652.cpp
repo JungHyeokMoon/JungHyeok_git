@@ -18,8 +18,8 @@ int main() {
 		d[x] += 1;
 	}
 
-	int m = 0;
-	long long ans = 0;
+	int m = 0;//갯수
+	long long ans = 0; //제일많은수
 
 	for (auto &p : d) {
 		if (m < p.second) {
