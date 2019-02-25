@@ -27,6 +27,7 @@ int main(){
         printf("%d. odd ",i);
         printf("%d\n",n4);
     }
+    
     i++;
 }
     return 0;
