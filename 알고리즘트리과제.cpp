@@ -95,6 +95,7 @@ int main() {
 		} // 트리연결
 
 		tree.postorderanswer(tree.root);
+		printf("%d\n",cnt);
 		tree.deletetree(tree.root);
 		
 		cnt = 0;
