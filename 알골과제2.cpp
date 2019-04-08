@@ -25,54 +25,57 @@ void printresult(int *size1, int *size2) {
 
 	
 	cout << setw(15) << "" << setw(15) << "data1" << setw(13) << quicktime2[0][0] << setw(13) << quicktime2[0][1] << setw(13) << quicktime2[0][2] << endl;
-	cout << setw(15) << "Merge sort" << setw(15) << "data2" << setw(13) << quicktime2[1][0] << setw(13) << quicktime2[1][1] << setw(13) << quicktime2[1][2] << endl;
+	cout << setw(15) << "Quick sort" << setw(15) << "data2" << setw(13) << quicktime2[1][0] << setw(13) << quicktime2[1][1] << setw(13) << quicktime2[1][2] << endl;
 	cout << setw(15) << "" << setw(15) << "data3" << setw(13) << quicktime2[2][0] << setw(13) << quicktime2[2][1] << setw(13) << quicktime2[2][2] << endl;
 	cout << setw(15) << "" << setw(15) << "average" << setw(13) << quicktime2[3][0] << setw(13) << quicktime2[3][1] << setw(13) << quicktime2[3][2] << endl;
 
 
 
 }
-void exchangesort(int *arr, int len) {
-	int i, j;
-	for (i = 0; i <= len - 1; i++) {
-		for (j = i + 1; j <= len; j++) {
-			if (arr[j] < arr[i]) {
-				int temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
+
+
+void exchangesort(int* ary, int size) {
+	for (int i = 1; i <= size - 1; i++) {
+		for (int j = i + 1; j < size; j++) {
+			if (ary[j] < ary[i]) {
+				int temp = ary[i];
+				ary[i] = ary[j];
+				ary[j] = temp;
 			}
 		}
 	}
+}
 
-} //버블정렬
 
-void Partition(int *arr, int left, int right,int *pivot) {
+void Partition(int low, int high, int *pivot, int* ary) {
 	int i, j;
-	int pivotitem = arr[left];
-	j = left;
-	for (i = left + 1; i <= right; i++) {
-		if (arr[i] < pivotitem) {
-			j++;
-			int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-		}
-		*pivot=j;
-		int temp=arr[left];
-		arr[left]=arr[j];
-		arr[j]=temp;
-	}
-	
-} //퀵정렬
+	int item = ary[low];
+	j = low;
 
-void Quick_sort(int * arr,  int left, int right) {
-	int pivot ;
-	if (left < right) {
-		Partition(arr, left, right,&pivot);
-		Quick_sort(arr, left, pivot - 1);
-		Quick_sort(arr, pivot + 1, right);
+	for (i = low + 1; i <= high; i++) {
+		if (ary[i] < item) {
+			j++;
+			int temp = ary[i];
+			ary[i] = ary[j];
+			ary[j] = temp;
+		}
+	}
+	*pivot = j;
+	int temp = ary[low];
+	ary[low] = ary[j];
+	ary[j] = temp;
+}
+
+void Quick_sort(int low, int high, int* ary) {
+	int pivot;
+	if (high > low) {
+		Partition(low, high, &pivot, ary);
+		Quick_sort(low, pivot - 1, ary);
+		Quick_sort(pivot + 1, high, ary);
 	}
 }
+
+
 
 void merge2(int *arr, int start, int mid, int end) {
 	int i = start;
@@ -137,24 +140,19 @@ int main() {
 	fscanf(f, "%d %d %d", &size1[0], &size1[1], &size1[2]);
 	fscanf(f, "%d %d %d", &size2[0], &size2[1], &size2[2]);
 	srand((unsigned)time(NULL));
-	clock_t test1;
-	clock_t start, end;
 	for (int i = 0; i < 3; i++) {
 		int *asarr1 = new int[size1[i]];
 		int *asarr2 = new int[size1[i]];
 
 		insertsortdata(asarr1, asarr2, size1[i]);
+		
+		clock_t time = clock();
+		exchangesort(asarr1, size1[i] );
+		exchangetime[i] = clock()-time;
 
-		start = clock();
-		exchangesort(asarr1, size1[i] - 1);
-		end = clock();
-		test1 = end - start;
-		exchangetime[i] = (clock_t)(end - start);
-
-		start = clock();
-		Quick_sort(asarr2, 0, size1[i] - 1);
-		end = clock();
-		quicktime1[i] = (clock_t)(end - start);
+		time = clock();
+		Quick_sort(0,size1[i]-1,asarr2);
+		quicktime1[i] = clock()-time;
 		
 		delete[] asarr1;
 		delete[] asarr2;
@@ -166,16 +164,13 @@ int main() {
 			int *randarr2 = new int[size2[j]];
 
 			insertRandomdata(randarr1, randarr2, size2[j]);
-
-			start = clock();
+			clock_t time = clock();
 			mergesort2(randarr1, 0, size2[j] - 1);
-			end = clock();
-			mergetime[i][j] = (clock_t)(end - start);
+			mergetime[i][j] = clock()-time;
 
-			start = clock();
-			Quick_sort(randarr2, 0, size2[j] - 1);
-			end = clock();
-			quicktime2[i][j] = (clock_t)(end - start);
+			time = clock();
+			Quick_sort(0,size2[j]-1,randarr2);
+			quicktime2[i][j] = clock()-time;
 
 			delete[]randarr1;
 			delete[]randarr2;
@@ -187,11 +182,11 @@ int main() {
 			mergetime[3][j] += mergetime[i][j];
 			quicktime2[3][j] += quicktime2[i][j];
 		}
-		mergetime[3][j] = (clock_t)(mergetime[3][j]) / 3;
-		quicktime2[3][j] = (clock_t)(quicktime2[3][j]) / 3;
+		mergetime[3][j] = (mergetime[3][j]) / 3;
+		quicktime2[3][j] = (quicktime2[3][j]) / 3;
 	}
 
 	printresult(size1, size2);
-	
+
 	fclose(f);
 }
