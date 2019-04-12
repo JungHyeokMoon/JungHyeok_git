@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{kotex}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+
+\title{hw2}
+\author{b511057 문정혁 }
+\date{April 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{lex}
+\qquad lex는 scanner를 만들 수 있는 tool이고, scanner는 텍스트의 어휘패턴을 인식하는 프로그램입니다. \\
+정의절 규칙절 서브루틴 세 부분으로 구성되어있고, 정의절은 정의, 내부 테이블선언, 시작조건등을 포함할수 있는 부분이고 규칙절 전까지의 부분을 통해서 패턴 정의하는 작업을 좀 더 쉽게 해줍니다. \\ 
+\indent 규칙절은 패턴으로 이루어진 행과 {}으로 둘러 싸인 c코드로 이루어져 있습니다. \\
+서브루틴부는 사용자가 서브루틴을 정의하는 부분입니다.\\ \\
+\section{lex 코드부분}
+\%\{ \\
+\indent unsigned word\_count\=0; \\
+\indent unsigned equal\_count\=0; \\
+\indent unsigned l\_parentheses\_count\=0; \\
+\indent unsigned r\_parentheses\_count\=0; \\
+\indent unsigned mark\_count\=0; \\ 
+\indent unsigned number\_count\=0; \\
+\%\}\\ \\
+\indent F (\{N\}+$\backslash$.\{N\}+) \\
+\indent N [0-9] \\
+\indent W [A-Za-z] \\
+\indent L "\{" \\
+\indent R "\}" \\
+\indent E "=" \\ 
+\indent M "$\sim$"$|$"`"$|$"!"$|$"@"$|$"\#"$|$"\$"$|$"\%"$|$"\^"$|$"\&"$|$"*"$|$"("$|$")"$|$"-"$|$"\_"$|$"+"$|$"["$|$"]"$|$"$|$"$|$
+$\backslash$
+$|$":"$|$";"$|$"""$|$"'"$|$"$<$"$|$","$|$"$>$"$|$"."$|$"$?$"$|$"/" \\ \\
+\%\% \\ \\
+$[$$\backslash$n $]$ +; \\
+$[$$\backslash$t $]$ +; \\
+$[$$\backslash$r $]$ +; \\ \\
+\{N\}+ \{number\_count++;\} \\
+\{F\} \{number\_count++;\} \\ 
+\{W\}+ \{word\_count++;\} \\
+\{L\} \{l\_parentheses\_count++;\} \\
+\{R\} \{r\_parentheses\_count++;\} \\
+\{E\} \{equal\_count++;\} \\
+\{M\} \{mark\_count++;\} \\
+. \{ECHO;\} \\ \\
+\%\% \\ \\
+int yywrap()\{ \\
+\indent return 1; \\
+\} \\
+int main(void)\{ \\
+\indent yylex();\\
+\indent printf("word = \%d$\backslash$n ,word\_count); \\
+\indent printf("'=' = \%d$\backslash$n",equal\_count); \\
+\indent printf("'\{' = \%d$\backslash$n",l\_parentheses\_count); \\
+\indent printf("'\}' = \%d$\backslash$ n", r\_parentheses\_count); \\
+\indent printf("mark = \%d$\backslash$ n", mark\_count); \\
+\indent printf("number = \%d$\backslash$ n", number\_count); \\
+\indent return 0;\\
+\}
+
+\section{lex 코드부분에 대한설명}
+\qquad 정의절에서는 각각 word, = , \{, \}, number, mark를 카운트 세기위한 변수들을 선언했습니다. \\ 
+\indent 0$\sim$9 인 숫자를 N 으로 토큰화,  실수 표현을 하기위해
+(\{N\}+$\backslash$.\{N\}+) 로 토큰화했습니다 +의 의미는 1회이상 반복이기때문에 .앞에 어떠한숫자하나라도 올경우 . 뒤에 어떠한 숫자라도 올경우 실수로 정의하는 의미입니다.
+W는 대소문자 알파벳 모두를 토큰화 했습니다. L은 \{ 를 토큰화, R은 \}를 토큰화 했고 나머지 특수문자들은 M 에 한번에 묶어서 토큰화 했습니다.\\
+\indent $[$$\backslash$n $]$ +; , $[$$\backslash$t $]$ +; , $[$$\backslash$r $]$ +; 이 셋의 경우에는 공백을 마주쳤을경우 무시해주기 위해 써놓은 코드입니다. 규칙절에서는 L,R,E,M 의경우 각각 토큰화 한것을 만날때 마다 카운트 해주기위해서 정규표현식을 사용하지 않았습니다. word, number 의경우를 살펴보면 word의경우 W로 정의한것을 파싱해서 읽어드릴때마다 카운트하는데 알파벳 여러개로 이어진 단어의 경우도 하나로 세기위해서 \{W\}+로 정규표현식을 이용했습니다. 정수를 N으로 실수를 F로 토큰화했는데 각각 nnnn 이렇게 또는 F로 정의한 숫자유형을 만났을경우 number\_count를 +1해줍니다. \\
+\indent 서브루틴절에서는 각각 카운트 센것들을 출력해주는 코드입니다.
+
+
+\end{document}
