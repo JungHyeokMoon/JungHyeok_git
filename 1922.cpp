@@ -17,6 +17,7 @@ int main() {
 	
 	cin >> n >> m;
 
+
 	for (int i = 0; i < m; i++) {
 		cin >> a >> b >> c;
 		adj[a].push_back(make_pair( c, b ));
