@@ -8,7 +8,7 @@ vector<int> arr;
 const int MAX = 9;
 bool visited[MAX];
 
-void p(int idx ,int depth) {
+void p(int depth) {
 	if (depth == m) {
 		for (int i = 0; i < arr.size(); i++) {
 			cout << arr[i] << " ";
@@ -22,7 +22,7 @@ void p(int idx ,int depth) {
 		arr.push_back(i);
 		visited[i] = true;
 
-		p(idx+1,depth + 1);
+		p(depth + 1);
 
 		arr.pop_back();
 		visited[i] = false;
@@ -34,5 +34,5 @@ int main() {
 	cin.tie(0);
 	std::cout.tie(NULL);
 	cin >> n >> m;
-	p(1,0);
+	p(0);
 }
