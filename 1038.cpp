@@ -1,34 +1,52 @@
+#pragma warning(disable:4996)
 #include <iostream>
+#include <string>
+#include <vector>
 #include <queue>
+#include <algorithm>
+#include <string.h>
+#include <map>
+#include <set>
 using namespace std;
-int idx=9;
-long long answer[1000000+1];
-int main(){
-    int n;
-    scanf("%d\n", &n);
+int n;
+const int MAX = 1000000;
+long long answer[MAX + 1];
+queue<long long > q;
 
-    queue<long long> q;
-    for(int i=0; i<=9; i++){
-        answer[i]=i;
-        q.push(i);
-    }//
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	cin >> n;
 
-    while(!q.empty()){
-        int lastnumber=q.front();
-        q.pop();
+	answer[0] = 0;
+	for (int i = 1; i <= 9; i++) {
+		q.push(i);
+		answer[i] = i;
+	}
+	
+	int idx = 9;
+	while (idx <= n) {
+		if (q.empty())
+			break;
 
-        for(int i=0; i<lastnumber; i++){
-            q.push(lastnumber*10+i);
-            answer[++idx]=lastnumber*10+i;
-        }
+		long long descendingnum = q.front();
+		q.pop();
+		int lastnumber = descendingnum % 10;
+		for (int i = 0; i < lastnumber; i++) {
+			q.push(descendingnum * 10 + i);
+			answer[++idx] = descendingnum * 10 + i;
+		}
+	}
 
-    }
+	if (answer[n] == 0 && n) {
+		cout << -1 << "\n";
+	}
+	else {
+		cout << answer[n] << "\n";
+	}
 
-    if(answer[0]==0){
-        printf("-1\n");
-    }
-    else
-        cout<<answer[n]<<endl;
-    
-    return 0;
+
+	
+	return 0;
 }
