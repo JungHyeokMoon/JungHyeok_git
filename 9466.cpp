@@ -46,6 +46,7 @@ int main() {
 		for (int i = 1; i <= n; i++) {
 			cin >> want[i];
 		}
+        
 
 		for (int i = 1; i <= n; i++) {
 			if (!visited[i]) {
