@@ -38,6 +38,7 @@ int solve(int i, int j) {
 	return ret += psum[j] - psum[i - 1];
 
 
+
 }
 int main() {
 	ios::sync_with_stdio(false);
