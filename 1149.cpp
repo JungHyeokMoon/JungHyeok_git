@@ -37,6 +37,7 @@ int main(){
          cin >> color[i][j];
       }
    }
+   
 
    memset(dp, -1, sizeof(dp));
 
