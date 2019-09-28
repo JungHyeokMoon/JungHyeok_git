@@ -12,7 +12,6 @@
 using namespace std;
 string input;
 
-string croatia_alphabet[8] = { "c=","c-","dz=","d-","lj","nj","s=","z=" };
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -21,18 +20,53 @@ int main() {
 
 	cin >> input;
 	int len = input.size();
-	for (int i = 0; i < len; i++) {
-		for (int j = 0; j < 8; j++) {
-			if (input.find(croatia_alphabet[j]) != string::npos) {
-				int k = 0;
-
-				k = input.find(croatia_alphabet[j]);
-
-				input.erase(k, croatia_alphabet[j].length());
-				input.insert(k, "*");
+	int i = 0;
+	int ret = 0;
+	for (unsigned i = 0; i < input.size(); i++) {
+		if (input[i] == 'c') {
+			if (input[i + 1] == '=' || input[i + 1] == '-') {
+				i = i + 1;
+				
 			}
 		}
+		else if (input[i] == 'd') {
+			if (input[i + 1] == '-') {
+				i = i + 1;
+				
+			}
+			else if (input[i + 1] == 'z' && input[i + 2] == '=') {
+				i = i + 2;
+				
+			}
+		}
+		else if (input[i] == 'l') {
+			if (input[i + 1] == 'j') {
+				i = i + 1;
+				
+			}
+		}
+		else if (input[i] == 'n') {
+			if (input[i + 1] == 'j') {
+				i = i + 1;
+				
+			}
+		}
+		else if (input[i] == 's') {
+			if (input[i + 1] == '=') {
+				i = i + 1;
+				
+			}
+		}
+		else if (input[i] == 'z') {
+			if (input[i + 1] == '=') {
+				i = i + 1;
+				
+			}
+		}
+		ret++;
 	}
-	cout << input.size() << "\n";
+
+
+	cout << ret << "\n";
 	return 0;
-}
+}	
