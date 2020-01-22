@@ -25,6 +25,8 @@ bool make_road1(int i, int j){
     return true;
 }
 
+
+
 bool make_road2(int i, int j){
     int compare=tilt[i+1][j];
     for(int k=i+1; k<i+1+l; k++){
