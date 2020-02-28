@@ -34,7 +34,7 @@ vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
     return answer;
 }
 
-
+//------------------------비트연산풀이---- ddudini님풀이참조
 #include <string>
 #include <vector>
 #include <bits/stdc++.h>
