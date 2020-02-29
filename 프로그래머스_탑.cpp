@@ -70,3 +70,28 @@ vector<int> solution(vector<int> heights) {
     reverse(answer.begin(),answer.end());
     return answer;
 }
+// ---- 인풋범위가커질경우
+#include <string>
+#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> solution(vector<int> heights) {
+    vector<int> answer;
+    int length=heights.size();
+    stack<pair<int,int>>stk; //높이 인덱스
+    for(int i=0; i<length; i++){
+        while(!stk.empty()){
+            if(stk.top().first>heights[i]){
+                answer.push_back(stk.top().second);
+                break;
+            }
+            stk.pop();
+        }
+        if(stk.empty()){
+            answer.push_back(0);
+        }
+        stk.push({heights[i],i+1});
+    }
+    return answer;
+}
