@@ -38,6 +38,7 @@ void Problem(int i){
     // for(int i=0; i<n; i++){
     //     cout<<dist[i]<<" ";
     // }
+    //test
     cout<<"Problem "<<i<<": "<<dist[n-1]<<endl;
 }
 void Solve(){
