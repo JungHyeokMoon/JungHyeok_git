@@ -1,81 +1,83 @@
-#pragma warning(disable:4996)
-#include <iostream>
-#include <string>
-#include <vector>
-#include <queue>
-#include <algorithm>
-#include <string.h>
-#include <map>
+#include <bits/stdc++.h>
+#define endl "\n"
 using namespace std;
-
-int garo, sero;
-//int ret = 0;
-const int MAX = 51;
-bool visited[MAX][MAX];
-char arr[MAX][MAX];
-
-int dir[4][2] = { {-1,0},{1,0},{0,1},{0,-1} };
-
-bool isinside(int hx, int hy) {
-	if (hx >= 0 && hy >= 0 && hx < garo && hy < sero)
-		return true;
-
-	return false;
+int n,m;
+vector<vector<char>> MAP;
+vector<vector<bool>> isvisited;
+bool isinside(int y, int x){
+    if(y>=0 && y<n && x>=0 && x<m){
+        return true;
+    }
+    return false;
 }
+typedef pair<int,pair<int,int>> piii;
+const int dy[4]={-1,0,1,0};
+const int dx[4]={0,-1,0,1};
+int ret=-987654321;
+void Input(){
+	cin>>n>>m;
+	MAP.resize(n);
+	isvisited.resize(n);
+	for(int i=0; i<n; i++){
+		MAP[i].resize(m);
+		isvisited[i].resize(m,false);
+	}
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m ; j++){
+			cin>>MAP[i][j];
+		}
+	}
+}
+int bfs(int y, int x){
+	for(int i=0; i<n; i++){
+		fill(isvisited[i].begin(),isvisited[i].begin()+m,false);
+	}
 
-int bfs(int hx, int hy,int cnt) {
-	
-	queue<pair<int,pair<int, int>>> q;
-	int ret = -1;
+	isvisited[y][x]=true;
+	queue<piii> q;
+	q.push({{0},{y,x}});
+	int temp=-987654321;
 
-
-	q.push(make_pair(cnt,make_pair(hx, hy)));
-	while (!q.empty()) {
-		int hx = q.front().second.first;
-		int hy = q.front().second.second;
-		int cnt = q.front().first;
-		
+	while(!q.empty()){
+		int hy=q.front().second.first;
+		int hx=q.front().second.second;
+		int hd=q.front().first;
 		q.pop();
-	
-		for (int i = 0; i < 4; i++) {
-			int nx = hx + dir[i][0];
-			int ny = hy + dir[i][1];
-			
-			if (nx < 0 || ny < 0 || nx >= garo || ny >= sero || visited[nx][ny])continue;
-			if (arr[nx][ny] == 'W')continue;
-			q.push(make_pair(cnt + 1, make_pair(nx, ny)));
-			visited[nx][ny] = true;
+		// cout<<"hy : "<<hy<<" , hx : "<<hx<<" , hd : "<<hd<<endl;
+		if(hd!=0){
+			temp=max(temp,hd);
 		}
-		ret = cnt;
-
-	}
-	return ret;
-}
-
-
-int main() {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	std::cout.tie(NULL);
-
-	cin >> garo >> sero;
-	for (int i = 0; i < garo; i++) {
-		for (int j = 0; j < sero; j++) {
-			cin >> arr[i][j];
-		}
-	}
-	
-	int ans = -1;
-	
-	for (int i = 0; i < garo; i++) {
-		for (int j = 0; j < sero; j++) {
-			if (arr[i][j] == 'L') {
-				ans = max(ans, bfs(i, j,0));
-				memset(visited, false, sizeof(visited));
-				
+		for(int i=0; i<4; i++){
+			int ny=hy+dy[i];
+			int nx=hx+dx[i];
+			if(!isinside(ny,nx))continue;
+			if(isvisited[ny][nx])continue;
+			if(MAP[ny][nx]=='L'){
+				isvisited[ny][nx]=true;
+				q.push({{hd+1},{ny,nx}});
 			}
 		}
 	}
 	
-	cout << ans << endl;
+	return temp;
+}
+void Solve(){
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(MAP[i][j]=='L'){
+				// cout<<"i : "<<i<<" , j : "<<j<<endl;
+				ret=max(ret,bfs(i,j));//지상인곳을 다 bfs돌려서 
+			}
+		}
+	}
+	cout<<ret<<endl;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+	Input();
+	Solve();
+	return 0;
 }
