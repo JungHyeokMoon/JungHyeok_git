@@ -39,7 +39,7 @@ void Solve()
         int diff=0;
         for(char ch='A'; ch<='Z'; ch++){
             diff+=abs(m[ch]-temp[ch]);
-        }
+        }//순서가 다를수 있기 때문에 'A'부터 'Z'까지돌아야함 반복문유의
         if(diff<=2){
             cnt++;
         }
