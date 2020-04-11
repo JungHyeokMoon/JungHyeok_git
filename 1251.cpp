@@ -15,7 +15,9 @@ void Solve()
             // cout<<i<<" "<<j <<endl;
             Arr[0] = str.substr(0, i);
             Arr[1] = str.substr(i, j-i);
-            Arr[2] = str.substr(j, length);
+            Arr[2] = str.substr(j, length); 
+            //substr(idx, leng) idx부터 lengh만큼의 갯수 idx부터 leng 을 뽑아오는데 만약 스트링이 끝나면 스트링
+            //끝나는데까지
             // cout<<Arr[0]<<" "<<Arr[1]<<" "<<Arr[2]<<endl;
             string temp = "";
             for (int k = 0; k < 3; k++)
