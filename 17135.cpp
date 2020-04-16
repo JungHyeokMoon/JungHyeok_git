@@ -5,7 +5,7 @@ int n,m,d;
 vector<vector<int>> Defense;
 vector<vector<int>> C_Defense;
 vector<int> archer;
-vector<bool> select; //궁수 조합짤때
+vector<bool> Select; //궁수 조합짤때
 int ret=-1e9;
 void Copy(){
     for(int i=0; i<n; i++){
@@ -16,7 +16,7 @@ void Copy(){
 }
 void Input(){
     cin>>n>>m>>d;
-    select.resize(m,false);//궁수고르기용
+    Select.resize(m,false);//궁수고르기용
     Defense.resize(n,vector<int>(m,0));
     C_Defense.resize(n,vector<int>(m,0));
     
@@ -111,12 +111,12 @@ void Make_Position(int idx){
         return ;
     }
     for(int i=idx ;i<m; i++){
-        if(!select[i]){
-            select[i]=true;
+        if(!Select[i]){
+            Select[i]=true;
             archer.push_back(i);
             Make_Position(i+1);
             archer.pop_back();
-            select[i]=false;
+            Select[i]=false;
         }
     }
 }
