@@ -1,30 +1,70 @@
-#include <iostream>
-#include <stack>
-#include <string>
+// #include <iostream>
+// #include <stack>
+// #include <string>
+// using namespace std;
+// int solution(string s) {
+// 	stack<int> stk;
+// 	int ans = 0;
+// 	for (int i = 0; i < s.size(); i++) {
+// 		if (s[i] == '(') {
+// 			stk.push(i);
+// 		}
+// 		else {
+// 			if (i - stk.top() == 1) { // ï¿½Ý´Â°ï¿½È£ï¿½Îµï¿½ topï¿½ï¿½ï¿½Ö´Â¼ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½Ì³ï¿½ï¿½ï¿½
+// 				stk.pop();//popï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// 				ans += stk.size();
+// 			}
+// 			else {
+// 				stk.pop();//popï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°ï¿½ï¿½Ì±â¶§ï¿½ï¿½ï¿½Ì´ï¿½
+// 				ans += 1;
+// 			}
+// 		}
+// 	}
+// 	return ans;
+// }
+// int main() {
+// 	string str;
+// 	cin >> str;
+// 	cout << solution(str) << endl;
+// 	return 0;
+// }
+
+#include <bits/stdc++.h>
 using namespace std;
-int solution(string s) {
-	stack<int> stk;
-	int ans = 0;
-	for (int i = 0; i < s.size(); i++) {
-		if (s[i] == '(') {
+#define endl "\n"
+
+void Solve()
+{
+	string str;
+	cin >> str;
+	stack<char> stk;
+	int ret = 0;
+	for (int i = 0; i < str.size(); i++)
+	{
+		if (str[i] == '(')
+		{
 			stk.push(i);
 		}
-		else {
-			if (i - stk.top() == 1) { // ´Ý´Â°ýÈ£ÀÎµ¥ top¿¡ÀÖ´Â¼ö¶û 1Â÷ÀÌ³¯¶§
-				stk.pop();//popÀ»ÇØÁÖ°í ´äÀ»´õÇØÁà¾ßÇÔ
-				ans += stk.size();
+		else
+		{
+			stk.pop();
+			if (str[i - 1] != ')')
+			{
+				ret += stk.size();
 			}
-			else {
-				stk.pop();//popÇØÁà¾ßÇÔ ´äÀ» ´õÇØÁÖ´Â°úÁ¤ÀÌ ½ºÅÃÀÇ »çÀÌÁî¸¦ ´õÇØÁÖ´Â°ÍÀÌ±â¶§¹®ÀÌ´Ù
-				ans += 1;
+			else
+			{
+				ret += 1;
 			}
 		}
 	}
-	return ans;
+	cout << ret << endl;
 }
-int main() {
-	string str;
-	cin >> str;
-	cout << solution(str) << endl;
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
+	Solve();
 	return 0;
 }
