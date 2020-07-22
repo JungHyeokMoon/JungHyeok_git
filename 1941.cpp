@@ -145,10 +145,6 @@ bool isInside(int y, int x)
 }
 bool Adj()
 {
-    // visited1.clear();
-    // visited2.clear();
-    // visited1.resize(MAPSIZE, vector<bool>(MAPSIZE, false));
-    // visited2.resize(MAPSIZE, vector<bool>(MAPSIZE, false));
     vector<vector<bool>> visited1(MAPSIZE, vector<bool>(MAPSIZE, false));
     vector<vector<bool>> visited2(MAPSIZE, vector<bool>(MAPSIZE, false));
 

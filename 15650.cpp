@@ -34,47 +34,79 @@
 // 	p(0,0);
 // }
 
+// #include <bits/stdc++.h>
+// #define endl "\n"
+// using namespace std;
+// int n, m;
+// vector<int> arr;
+// vector<bool> visited;
+// void Recursion(int k)
+// {
+// 	if (arr.size() == m)
+// 	{
+// 		for (auto i : arr)
+// 		{
+// 			cout << i << " ";
+// 		}
+// 		cout << endl;
+// 		return;
+// 	}
+
+// 	for (int i = k; i <= n; i++)
+// 	{
+// 		if (!visited[i])
+// 		{
+// 			arr.push_back(i);
+// 			visited[i] = true;
+// 			Recursion(i + 1);
+// 			visited[i] = false;
+// 			arr.pop_back();
+// 		}
+// 	}
+// }
+// void Solve()
+// {
+// 	cin >> n >> m;
+// 	visited.resize(n + 1, false);
+// 	Recursion(1);
+// }
+// int main()
+// {
+// 	ios_base::sync_with_stdio(0);
+// 	cin.tie(0);
+// 	cout.tie(0);
+// 	Solve();
+// 	return 0;
+// }
+
 #include <bits/stdc++.h>
 #define endl "\n"
 using namespace std;
 int n, m;
-vector<int> arr;
-vector<bool> visited;
-void Recursion(int k)
-{
-	if (arr.size() == m)
-	{
-		for (auto i : arr)
-		{
-			cout << i << " ";
-		}
-		cout << endl;
-		return;
-	}
-
-	for (int i = k; i <= n; i++)
-	{
-		if (!visited[i])
-		{
-			arr.push_back(i);
-			visited[i] = true;
-			Recursion(i + 1);
-			visited[i] = false;
-			arr.pop_back();
-		}
-	}
-}
-void Solve()
-{
-	cin >> n >> m;
-	visited.resize(n + 1, false);
-	Recursion(1);
-}
 int main()
 {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
-	Solve();
+	cin >> n >> m;
+	vector<int> v(n);
+	fill(v.begin(), v.begin() + m, 0);
+	fill(v.begin() + m, v.begin() + n, 1);
+	do
+	{
+		int cnt = 0;
+		for (int i = 0; i < v.size(); i++)
+		{
+			if (cnt == m)
+				break;
+			if (v[i] == 0)
+			{
+				cout << i + 1 << " ";
+				cnt++;
+			}
+		}
+		cout << endl;
+	} while (next_permutation(v.begin(), v.end()));
 	return 0;
 }
+//조합
