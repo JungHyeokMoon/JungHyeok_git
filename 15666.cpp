@@ -113,3 +113,45 @@
 //     Recursion(0);
 //     return 0;
 // }
+
+#include <bits/stdc++.h>
+#define endl "\n"
+using namespace std;
+int n, m;
+set<vector<int>> S;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    cin >> n >> m;
+    vector<int> v(n);
+    for (int i = 0; i < n; i++)
+        cin >> v[i];
+    sort(v.begin(), v.end());
+    vector<int> combi(n + m - 1, 1);
+    fill(combi.begin(), combi.begin() + m, 0);
+
+    do
+    {
+        int cnt = 0;
+        vector<int> ret;
+        for (int i = 0; i < combi.size(); i++)
+        {
+            if (combi[i] == 0)
+            {
+                ret.push_back(v[i - cnt]);
+                cnt++;
+            }
+        }
+        if (S.find(ret) == S.end())
+        {
+            for (auto i : ret)
+                cout << i << " ";
+            S.insert(ret);
+            cout << endl;
+        }
+
+    } while (next_permutation(combi.begin(), combi.end()));
+    return 0;
+}
