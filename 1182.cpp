@@ -40,46 +40,46 @@
 
 // }
 
-#include <bits/stdc++.h>
-#define endl "\n"
-using namespace std;
-int n, s;
-vector<int> arr;
+// #include <bits/stdc++.h>
+// #define endl "\n"
+// using namespace std;
+// int n, s;
+// vector<int> arr;
 
-int ret = 0;
-void Init()
-{
-	cin >> n >> s;
-	arr.resize(n);
-	for (int i = 0; i < n; i++)
-	{
-		cin >> arr[i];
-	}
-}
-void Recursion(int k, int sum)
-{
-	if (k == n)
-	{
-		return;
-	}
-	if (sum + arr[k] == s)
-	{
-		ret++;
-	}
-	Recursion(k + 1, sum + arr[k]);
-	Recursion(k + 1, sum);
-}
-void Solve()
-{
-	Recursion(0, 0);
-	cout << ret << endl;
-}
-int main()
-{
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
-	Init();
-	Solve();
-	return 0;
-}
+// int ret = 0;
+// void Init()
+// {
+// 	cin >> n >> s;
+// 	arr.resize(n);
+// 	for (int i = 0; i < n; i++)
+// 	{
+// 		cin >> arr[i];
+// 	}
+// }
+// void Recursion(int k, int sum)
+// {
+// 	if (k == n)
+// 	{
+// 		return;
+// 	}
+// 	if (sum + arr[k] == s)
+// 	{
+// 		ret++;
+// 	}
+// 	Recursion(k + 1, sum + arr[k]);
+// 	Recursion(k + 1, sum);
+// }
+// void Solve()
+// {
+// 	Recursion(0, 0);
+// 	cout << ret << endl;
+// }
+// int main()
+// {
+// 	ios_base::sync_with_stdio(0);
+// 	cin.tie(0);
+// 	cout.tie(0);
+// 	Init();
+// 	Solve();
+// 	return 0;
+// }
