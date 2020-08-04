@@ -145,7 +145,7 @@ int tilt()
 
             int Bny = B.first + dir[d].first;
             int Bnx = B.second + dir[d].second;
-            if (Rny == Point[0].first && Rnx == Point[0].second)
+            if (Rny == Point[0].first && Rnx == Point[0].second) //빨간공이 도착하고나서 Check로 파란공이 들어오냐 안들어오냐 체크
                 return Check(B, d) == true ? i + 1 : 1e9;
 
             else if (Bny == Point[0].first && Bnx == Point[0].second)
