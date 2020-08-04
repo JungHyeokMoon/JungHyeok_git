@@ -130,9 +130,9 @@ void Recursion(int hy, int hx, int hd)
 
     int ny = hy + dir[(hd + 2) % 4].first;
     int nx = hx + dir[(hd + 2) % 4].second;
-    if (MAP[ny][nx] == 2)
+    if (MAP[ny][nx] == 2) //후진
         Recursion(ny, nx, hd);
-    else if (MAP[ny][nx] == 1)
+    else if (MAP[ny][nx] == 1) //dfs이기 때문에 exit(0)으로 강제 종료
     {
         cout << ret << endl;
         exit(0);
