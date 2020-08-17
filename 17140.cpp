@@ -177,9 +177,7 @@ void RowOperation(){
             m[A[i][j]]++;
         }
         vector<pair<int,int>> temp(m.begin(),m.end());
-        // for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
-        //     temp.push_back({iter->first,iter->second});
-        
+
         sort(temp.begin(), temp.end(),Compare);
         int k=0;
         int length=temp.size();
@@ -205,9 +203,7 @@ void ColOperation(){
             m[A[j][i]]++;
         }
         vector<pair<int,int>> temp(m.begin(),m.end());
-        // for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
-        //     temp.push_back({iter->first,iter->second});
-        
+
         sort(temp.begin(),temp.end(),Compare);
         int k=0;
         int length=temp.size();
