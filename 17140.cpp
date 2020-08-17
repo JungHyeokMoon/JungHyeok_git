@@ -171,14 +171,14 @@ void RowOperation(){
     int tempMaxColLength=0;
     for(int i=0; i<maxRowLength; i++){
         map<int,int> m;
-        vector<pair<int,int>> temp;
+        
         for(int j=0; j<maxColLength; j++){
             if(A[i][j]==0)continue; // 수 정렬할때 0은 무시한다.
             m[A[i][j]]++;
         }
-        
-        for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
-            temp.push_back({iter->first,iter->second});
+        vector<pair<int,int>> temp(m.begin(),m.end());
+        // for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
+        //     temp.push_back({iter->first,iter->second});
         
         sort(temp.begin(), temp.end(),Compare);
         int k=0;
@@ -199,14 +199,14 @@ void ColOperation(){
     int tempMaxLength=0;
     for(int i=0; i<maxColLength; i++){
         map<int,int> m;
-        vector<pair<int,int>> temp;
+        
         for(int j=0; j<maxRowLength ;j++){
             if(A[j][i]==0)continue;
             m[A[j][i]]++;
         }
-        
-        for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
-            temp.push_back({iter->first,iter->second});
+        vector<pair<int,int>> temp(m.begin(),m.end());
+        // for(map<int,int>::iterator iter=m.begin(); iter!=m.end(); iter++)
+        //     temp.push_back({iter->first,iter->second});
         
         sort(temp.begin(),temp.end(),Compare);
         int k=0;
