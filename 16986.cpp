@@ -1,90 +1,73 @@
 #include <bits/stdc++.h>
+#define endl "\n"
 using namespace std;
 int n,k;
-int match[10][10];
-int JKM[3][20];
-bool Select[10];
-int win[3]; //0 지우 1 경희 2민호
-int turn[3];
-int ans=0;
+vector<vector<int>> input;
+vector<vector<int>> rsp;
 
-void Input(){
-    cin>>n>>k; //손동작수 ,필요한승수
-    for(int i=1; i<=n; i++){
-        for(int j=1; j<=n; j++){
-            cin>>match[i][j]; //2이면 i가 j를 이김 ,1이면 비기고 , 0이면 진다
-        }
-    }
+vector<vector<int>> temp;
+vector<bool>combi;
+
+
+void Init(){
+    cin>>n>>k;
+    input.resize(n,vector<int>(n));
+    for(int i=0; i<n; i++)
+        for(int j=0 ;j<n; j++)
+            cin>>input[i][j];
+
+    rsp.resize(3,vector<int>(20));
     for(int i=1; i<3; i++){
         for(int j=0; j<20; j++){
-            cin>>JKM[i][j];
+            // cin>>rsp[i][j];
+            int temp;
+            cin>>temp;
+            rsp[i][j]=temp-1;
         }
     }
+    for(int i=0; i<n; i++)
+        rsp[0][i]=i;
 }
+bool Match(){
+    int wins[3]={0,0,0};
+    int idx[3]={0,0,0};
+    int p1=0, p2=1, p3=2;
+    while(1){
+        if(p1>p2)swap(p1,p2);
 
-void dfs(int p1, int p2){
-    if(win[0]==k){
-        ans=1;
-        return; 
-    }
-    if(win[1]==k||win[2]==k){
-        return;
-    }
-    if(turn[0]>n||ans==1){
-        return ;
-    }
-    int winner;
-    int turn1=turn[p1];
-    int turn2=turn[p2];
+        if(p1==0 && idx[p1]==n)break;
+        if(idx[p1]==20 || idx[p2]==20)break;
+        int a=rsp[p1][idx[p1]++];
+        int b=rsp[p2][idx[p2]++];
 
-    int n1=JKM[p1][turn1]; 
-    int n2=JKM[p2][turn2];
-
-    if(match[n1][n2]==2){
-        winner=p1;
-    }
-    else if(match[n1][n2]==0){
-        winner=p2;
-    }
-    else {
-        if(p1<p2){
-            winner=p2;
-        }
+        if(input[a][b]==2){
+            wins[p1]++; 
+            swap(p2,p3);
+            if(wins[p1]==k)break;
+        } //앞에사람이 이김
         else{
-            winner=p1;
+            wins[p2]++;
+            swap(p1,p3);
+            if(wins[p2]==k)break;
+        }//뒤에사람이 이김
+    }
+    return wins[0]>=k;
+}
+void Solve(){
+    do{
+        if(Match()){
+            cout<<1<<endl;
+            return ;
         }
-    }
-
-    turn[p1]++;
-    turn[p2]++;
-    win[winner]++;
-    dfs(winner,3-(p1+p2));
-    win[winner]--;
-    turn[p1]--;
-    turn[p2]--;
-
+    }while(next_permutation(rsp[0].begin(),rsp[0].begin()+n));
+    cout<<0<<endl; 
 }
-void Make_Order(int cnt){
-    if(cnt==10){
-        dfs(0,1);
-        return;
-    }
-    for(int i=1; i<=n; i++){
-        if(Select[i])continue;
-        Select[i]=true;
-        JKM[0][cnt]=i;
-        Make_Order(cnt+1);
-        JKM[0][cnt]=-1;
-        Select[i]=false;
-    }
-}
-
-
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    Input();
-    cout<<ans<<"\n";
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    Init();
+    Solve();
     return 0;
 }
