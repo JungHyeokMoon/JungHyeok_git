@@ -66,21 +66,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define endl "\n"
+vector<int> A;
+void Init(){
+    int number;
+    while(cin>>number)
+        A.push_back(number);
+    
+    
+}
+void BubbleSort(){
+    int length=A.size();
+    for(int i=0; i<length-1; i++){
+        for(int j=0; j<length-1-i; j++){
+            if(A[j]>A[j+1])
+                swap(A[j],A[j+1]);
+        }
+    }
 
+    for(auto i : A)
+        cout<<i<<" ";
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    auto bar=make_tuple(1,'c',"qwe");
-
-    cout<<get<1>(bar)<<endl; //c
-    cout<<get<2>(bar)<<endl; //qwe
-
-    int a; char b; string c;
-    tie(a,b,c)=bar;
-
-    cout<<a<<" "<<b<<" "<<c<<endl; //1 c qwe
-
+    Init();
+    BubbleSort();
     return 0;
 }

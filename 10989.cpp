@@ -1,28 +1,61 @@
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <tuple>
+// #include <iostream>
+// #include <algorithm>
+// #include <string>
+// #include <vector>
+// #include <tuple>
+// using namespace std;
+
+
+// int cnt[10000 + 1];
+// int main() {
+// 	int n;
+// 	scanf("%d", &n);
+
+// 	int temp = 0;
+// 	for (int i = 0; i < n; i++) {
+// 		scanf("%d", &temp);
+// 		cnt[temp] += 1;
+// 	}//cnt[i] ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ iï¿½ï¿½ ï¿½î°³ ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+// 	for (int i = 0; i <= 10000; i++) {
+// 		if (cnt[i] > 0) {// 1~10000ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ì»ï¿½ï¿½Ì¸ï¿½
+// 			for (int j = 0; j < cnt[i]; j++) {
+// 				printf("%d\n", i);// ï¿½Ô·Â¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+// 			}
+// 		}
+// 	}
+
+// 	return 0;
+// }
+
+#include <bits/stdc++.h>
 using namespace std;
-
-
-int cnt[10000 + 1];
-int main() {
-	int n;
-	scanf("%d", &n);
-
-	int temp = 0;
-	for (int i = 0; i < n; i++) {
-		scanf("%d", &temp);
-		cnt[temp] += 1;
-	}//cnt[i] ¸¦ ÀÔ·ÂÀ¸·Î µé¾î¿Â ¼öÁß¿¡¼­ i°¡ ¸î°³ ÀÖ´ÂÁö¸¦ ÀúÀå
-	for (int i = 0; i <= 10000; i++) {
-		if (cnt[i] > 0) {// 1~10000±îÁö¿¡ ¼öÁß ÀÔ·Â¹ÞÀº°³¼ö°¡ 1ÀÌ»óÀÌ¸é
-			for (int j = 0; j < cnt[i]; j++) {
-				printf("%d\n", i);// ÀÔ·Â¹ÞÀº¼ö¸¸Å­ Ãâ·ÂÇÑ´Ù.
-			}
+#define endl "\n"
+vector<int> A;
+int n;
+void Init(){
+	cin>>n;
+	A.resize(10001,0);
+	for(int i=0; i<n; i++){
+		int a;
+		cin>>a;
+		A[a]++;
+	}
+}
+void Output(){
+	for(int i=0; i<=10000; i++){
+		if(A[i]!=0){
+			int length=A[i];
+			for(int j=0; j<length ; j++)
+				cout<<i<<" ";
 		}
 	}
-
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+	Init();
+	Output();
 	return 0;
 }
