@@ -69,8 +69,8 @@ string solution(string p) {
 }
 
 int main(){
-    // cout<<solution("(()())()")<<endl;;
-    // cout<<solution(")(")<<endl;
+    cout<<solution("(()())()")<<endl;;
+    cout<<solution(")(")<<endl;
     cout<<solution("()))((()")<<endl;
     return 0;
 }
