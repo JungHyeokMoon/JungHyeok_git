@@ -52,14 +52,11 @@ int main(){
     record.push_back("Enter uid1234 Muzi");
     record.push_back("Enter uid4567 Prodo");
     record.push_back("Leave uid1234");
-    // record.push_back("Enter uid1234 Prodo");
+    record.push_back("Enter uid1234 Prodo");
     record.push_back("Change uid4567 Ryan");
     vector<string>Answer=solution(record);
     
     for(auto i : Answer)
         cout<<i<<endl;
-
-    // cout<<Enter<<endl;
-    // cout<<Leave<<endl;
     return 0;
 }
